@@ -1,0 +1,29 @@
+﻿@model PNN.ProductsApp.Web.Models.CategoryDTO
+@{
+    Layout = null;
+}
+
+<div class="panel panel-default">
+    <div id="pnlCategotyEditHead" class="panel-heading">Category modification</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", @class = "edit-form" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+            <div class="alert alert-danger" style="display: none" id="valSummaryCategories">.<a href="#" class="close" aria-label="close">&times;</a></div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Enter name", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Enter description", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+                <div class="form-group pull-right">
+                    <button class="btn btn-default" type="button" id="btnCategoryEditCancel">Calcel</button>
+                    <button class="btn btn-default" type="button" id="btnCategoryEditSubmit">Submit</button>
+                </div>
+        }
+    </div>
+</div>

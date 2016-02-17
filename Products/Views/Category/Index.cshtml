@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+}
+
+<div class="row">
+    <div id="categoriesGridContainer" class="col-md-8 col-sm-12">
+        <div class="well well-sm clearfix">
+            <h4 class="pull-left">Categories</h4>
+            <button type="button" class="btn btn-success pull-right" id="btnAddNewCategory">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add
+            </button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th class="text-center edit-options-head">Edit options</th>
+                </tr>
+            </thead>
+            <tbody id="categoryTableBody">
+            </tbody>
+        </table>
+    </div>
+    <div id="categoryEditContainer" class="col-md-4 col-sm-12" style="display: none;">
+        @Html.Action("CategoryEdit")
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/custom/category")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            FormManager.initTable(CategoryInit);
+        });
+
+    </script>
+}
+

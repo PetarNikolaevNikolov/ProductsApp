@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="alert alert-danger" style="display: none" id="valSummaryProducts">.<a href="#" class="close" aria-label="close">&times;</a></div>
+        <div class="panel-heading">Search Products</div>
+        <div class="panel-body">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="searchId">Id:</label>
+                    <input type="number" class="form-control" id="searchId" placeholder="Enter product id">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="searchName">Name:</label>
+                    <input type="text" class="form-control" id="searchName" placeholder="Enter product name">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="searchCategoryName">Category:</label>
+                    <input type="text" class="form-control" id="searchCategoryName" placeholder="Enter category name">
+                </div>
+                <button type="button" class="btn btn-default" id="btnSearch">Search</button>
+            </form>
+        </div>
+    </div>
+    <div id="productsGridContainer" class="col-md-8 col-sm-12">
+        <div class="well well-sm clearfix">
+            <h4 class="pull-left">Products</h4>
+            <button type="button" class="btn btn-success pull-right" id="btnAddNewProduct">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add
+            </button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th class="text-center edit-options-head">Edit options</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+            </tbody>
+        </table>
+    </div>
+    <div id="productEditContainer" class="col-md-4 col-sm-12" style="display: none;">
+        @Html.Action("ProductEdit")
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/custom/product")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            FormManager.initTable(ProductInit);
+
+            $('#btnSearch').click(function () {
+                filterData = ProductInit.getFilterData();
+                FormManager.setSelectFilter(filterData);
+                FormManager.reloadTableData();
+            });
+        });
+    </script>
+}
